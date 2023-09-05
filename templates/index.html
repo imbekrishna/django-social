@@ -1,0 +1,304 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Social</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins&family=Quicksand&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/wired/64/000000/social-network.png"
+      type="image/png" />
+    <link rel="stylesheet" href="{% static 'style.min.css' %}">
+  </head>
+  <body class="bg-gray-100">
+    <header
+      x-data="{mobilenavOpen: false}"
+      class="bg-gray-800 h-20 [&>*]:px-8 text-white md:flex items-center justify-between sticky top-0 z-50">
+      <div class="flex items-center justify-between h-20">
+        <logo>
+          <a class="flex items-center gap-1" href="#">
+            <img
+              class="h-8"
+              src="https://img.icons8.com/wired/64/ffffff/social-network.png"
+              alt="social-network" />
+            <span>Awesome</span>
+          </a>
+        </logo>
+        <mobileicon class="md:hidden">
+          <a
+            @click="mobilenavOpen = !mobilenavOpen"
+            class="h-12 w-12 flex items-center justify-center cursor-pointer hover:bg-gray-700 rounded-lg">
+            <img
+              x-show="!mobilenavOpen"
+              class="w-6 h-6 select-none"
+              src="https://img.icons8.com/small/64/ffffff/menu.png"
+              alt="mobile menu icon" />
+            <img
+              x-show="mobilenavOpen"
+              x-cloak
+              class="w-6 h-6 select-none"
+              src="https://img.icons8.com/small/64/ffffff/delete-sign.png"
+              alt="mobile menu icon" />
+          </a>
+        </mobileicon>
+      </div>
+      <nav
+        x-show="mobilenavOpen"
+        x-cloak
+        class="md:!block bg-gray-800 h-screen w-screen md:h-auto md:w-auto -mt-20 md:mt-0 absolute md:relative z-[-1]"
+        x-transition:enter="duration-300 ease-out"
+        x-transition:enter-start="opacity-0 -translate-y-96"
+        x-transition:enter-end="opacity-100 translate-y-0">
+        <ul
+          class="flex flex-col items-center navitems md:flex-row gap-8 justify-center h-full md:gap-0 -translate-y-10 md:translate-y-0">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Create Post</a></li>
+          <li x-data="{dropdownOpen: false}" class="relative">
+            <a
+              @click="dropdownOpen = !dropdownOpen"
+              @click.away="dropdownOpen = false"
+              class="cursor-pointer select-none">
+              <img
+                class="h-8 rounded-full object-cover bg-teal-200"
+                src="https://img.icons8.com/doodle/96/bart-simpson.png"
+                alt="bart-simpson" />
+              Bart
+              <img
+                x-bind:class="dropdownOpen ? 'rotate-180 duration-300' : 'rotate-0 duration-300'"
+                class="w-4"
+                src="https://img.icons8.com/small/64/777777/expand-arrow.png"
+                alt="expand-arrow" />
+            </a>
+            <div
+              x-show="dropdownOpen"
+              x-cloak
+              class="absolute right-0 bg-white text-black shadow rounded-lg w-40 p-2 z-20"
+              x-transition:enter="duration-300 ease-out"
+              x-transition:enter-start="opacity-0 -translate-y-5 scale-90"
+              x-transition:enter-end="opacity-100 translate-0 scale-100">
+              <ul class="hoverlist [&>li>a]:justify-end">
+                <li><a href="">My Profile</a></li>
+                <li><a href="">Log out</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <hero
+      class="grid bg-gray-700 text-white text-center bg-center bg-cover z-10 relative bg-[url('https://images.unsplash.com/photo-1693249942577-7d44a2e26c50?w=1460')]">
+      <div
+        class="col-start-1 row-start-1 bg-gray-800 bg-opacity-40 w-full h-full"></div>
+      <div class="col-start-1 row-start-1 py-24 px-10">
+        <h1 class="title-blip">Awesome photos & Captions</h1>
+        <p class="text-lg font-bold mb-5">
+          Share your favorite photos from flickr and a great caption
+        </p>
+        <a class="button" href="">Get Started</a>
+      </div>
+    </hero>
+    <content
+      x-data="{mobileSidebarOpen: false}"
+      class="grid grid-cols-3 max-w-7xl mx-auto mt-6">
+      <mobilesidebarnav
+        class="md:hidden col-span-full mx-auto mb-6 z-10 relative">
+        <a
+          @click="mobileSidebarOpen = !mobileSidebarOpen"
+          class="flex items-center cursor-pointer select-none font-bold hover:bg-gray-200 rounded-lg p-3">
+          <span>Categories</span>
+          <img
+            x-bind:class="mobileSidebarOpen ? 'rotate-180 duration-300' : 'rotate-0 duration-300'"
+            class="w-4 ml-1.5"
+            src="https://img.icons8.com/small/64/777777/expand-arrow.png"
+            alt="expand-arrow" />
+        </a>
+      </mobilesidebarnav>
+      <main
+        class="col-span-full md:col-span-2 mx-[5%] md:mx-[10%] order-2 md:order-1">
+        <article class="card">
+          <div class="flex items-center justify-between px-4 h-14">
+            <h3 class="text-lg font-bold w-[50%] truncate">Pop kitty!</h3>
+            <div class="text-sm text-gray-500 hover:underline">
+              flickr @<a href="" target="_blank">John Doe</a>
+            </div>
+          </div>
+          <figure>
+            <a href=""
+              ><img
+                class="w-full"
+                src="https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?auto=format&fit=crop&w=640&q=80"
+                alt="Kitty with sunglass"
+            /></a>
+          </figure>
+          <div class="p-4 pb-2">
+            <a class="flex items-center gap-1 mb-4" href="">
+              <img
+                class="w-8 h-8 rounded-full"
+                src="https://img.icons8.com/small/64/a9a9a9/happy.png"
+                alt="happy" />
+              <span class="font-bold hover:underline">Lisa</span>
+            </a>
+            <p class="text-5xl mb-10 px-4 title-font">
+              Pop kitty saves the day!
+            </p>
+            <div class="flex items-center gap-2 text-sm mb-5">
+              <a
+                class="bg-gray-200 rounded-full px-3 py-1 hover:bg-gray-500 hover:text-white"
+                href=""
+                >Animals</a
+              >
+              <a
+                class="bg-gray-200 rounded-full px-3 py-1 hover:bg-gray-500 hover:text-white"
+                href=""
+                >Cute</a
+              >
+            </div>
+            <div class="flex items-center justify-between text-sm px-2">
+              <a class="font-bold hover:underline" href=""
+                >Comments<span class="font-light text-gray-500 ml-2">3</span></a
+              >
+              <div class="flex items-center gap-4 [&>a:hover]:underline">
+                <div class="flex items-center gap-1">
+                  <img
+                    class="w-5"
+                    src="https://img.icons8.com/small/24/hearts.png"
+                    alt="hearts" />1
+                </div>
+                <a href="">Like</a>
+                <a href="">Edit</a>
+                <a href="">Delete</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </main>
+      <aside
+        x-show="mobileSidebarOpen"
+        x-cloak
+        class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[20%] order-1 md:order-2"
+        x-transition:enter="duration-300 ease-out"
+        x-transition:enter-start="opacity-0 -mt-96"
+        x-transition:enter-end="opacity-100 mt-0">
+        <section class="card p-4">
+          <h2>Categories</h2>
+          <ul class="hoverlist">
+            <li class="highlight">
+              <a href="">
+                <img
+                  class="w-8 h-8 object-cover mr-2"
+                  src="https://img.icons8.com/small/96/null/landscape.png"
+                  alt="" />
+                <span class="font-bold text-sm">Landscape</span>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <img
+                  class="w-8 h-8 object-cover mr-2"
+                  src="https://img.icons8.com/small/96/null/portrait.png"
+                  alt="" />
+                <span class="font-bold text-sm">People</span>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <img
+                  class="w-8 h-8 object-cover mr-2"
+                  src="https://img.icons8.com/small/96/null/dog.png"
+                  alt="" />
+                <span class="font-bold text-sm">Animals</span>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <img
+                  class="w-8 h-8 object-cover mr-2"
+                  src="https://img.icons8.com/small/96/null/collage.png"
+                  alt="" />
+                <span class="font-bold text-sm">Abstract</span>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <img
+                  class="w-8 h-8 object-cover mr-2"
+                  src="https://img.icons8.com/small/96/null/180-degrees.png"
+                  alt="" />
+                <span class="font-bold text-sm">Black & White</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section class="card p-4">
+          <h2>Top Photos</h2>
+          <ul class="hoverlist">
+            <li>
+              <a href="">
+                <img
+                  class="w-10 h-10 rounded-lg object-cover mr-3"
+                  src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg"
+                  alt="Kitty" />
+                <img
+                  class="w-6 h-6 rounded-full mr-0.5"
+                  src="https://img.icons8.com/small/64/a9a9a9/happy.png"
+                  alt="happy" />
+                <span class="font-bold text-sm mr-1">Homer</span>
+                <span class="text-sm font-light text-gray-500">(5 Likes)</span>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <img
+                  class="w-10 h-10 rounded-lg object-cover mr-3"
+                  src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg"
+                  alt="Kitty" />
+                <img
+                  class="w-6 h-6 rounded-full mr-0.5"
+                  src="https://img.icons8.com/small/64/a9a9a9/happy.png"
+                  alt="happy" />
+                <span class="font-bold text-sm mr-1">Homer</span>
+                <span class="text-sm font-light text-gray-500">(5 Likes)</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section class="card p-4">
+          <h2>Top Posts</h2>
+          <ul class="hoverlist">
+            <li>
+              <a href="">
+                <img
+                  class="w-6 h-6 rounded-full mr-1"
+                  src="https://img.icons8.com/small/64/a9a9a9/happy.png"
+                  alt="happy" />
+                <span class="font-bold text-sm mr-1">Homer</span>
+                <span class="text-sm font-light text-gray-500">(5 Likes)</span>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <img
+                  class="w-6 h-6 rounded-full mr-1"
+                  src="https://img.icons8.com/small/64/a9a9a9/happy.png"
+                  alt="happy" />
+                <span class="font-bold text-sm mr-1">Homer</span>
+                <span class="text-sm font-light text-gray-500">(5 Likes)</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </aside>
+    </content>
+  </body>
+</html>

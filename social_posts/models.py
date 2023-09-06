@@ -1,5 +1,5 @@
 from django.db import models
-
+import uuid
 
 # Create your models here.
 class Post(models.Model):
@@ -10,7 +10,10 @@ class Post(models.Model):
     id = models.UUIDField(
         primary_key=True,
         max_length=100,
-        default=True,
+        default=uuid.uuid4,
         unique=True,
         editable=False,
     )
+
+    def __str__(self) -> str:
+        return self.title[:50]

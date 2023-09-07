@@ -28,6 +28,7 @@ def home_view(request, tag=None):
         context,
     )
 
+
 @login_required
 def post_create_view(request):
     form = PostCreateForm(request.POST or None)
@@ -66,6 +67,7 @@ def post_create_view(request):
     context = {"form": form}
     return render(request, "social_posts/post_create.html", context)
 
+
 @login_required
 def post_delete_view(request, post_id):
     post = get_object_or_404(Post, id=post_id, author=request.user)
@@ -80,6 +82,7 @@ def post_delete_view(request, post_id):
         "social_posts/post_delete.html",
         {"post": post},
     )
+
 
 @login_required()
 def post_edit_view(request, post_id):

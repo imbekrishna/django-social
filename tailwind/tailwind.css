@@ -9,11 +9,11 @@
 :root {
   --primary: rgb(88, 40, 244);
   --primary-hover: rgb(69, 29, 200);
-  --black : #040D12;
+  --black: #040D12;
 }
 
 .navitems>li>a {
-  @apply h-12 px-4 hover:bg-gray-700 rounded-lg flex items-center gap-2;
+  @apply h-12 px-4 hover: bg-gray-700 rounded-lg flex items-center gap-2;
 }
 
 h1 {
@@ -35,7 +35,8 @@ h2 {
   font-family: "Poppins";
 }
 
-.button {
+.button,
+button[type="submit"] {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
@@ -53,7 +54,8 @@ h2 {
   transition-duration: 0.2s;
 }
 
-.button-primary{
+.button-primary,
+button[type="submit"] {
   background-color: var(--primary);
   color: white;
 }
@@ -66,8 +68,8 @@ h2 {
   transform: scale(0.95);
 }
 
-.button-secondary{
-  @apply bg-gray-100 hover:bg-gray-200;
+.button-secondary {
+  @apply bg-gray-100 hover: bg-gray-200;
 }
 
 .card {
@@ -83,7 +85,7 @@ h2 {
 }
 
 .hoverlist>* {
-  @apply hover:bg-gray-100 rounded-md transition duration-150;
+  @apply hover: bg-gray-100 rounded-md transition duration-150;
 }
 
 .hoverlist>*>a {

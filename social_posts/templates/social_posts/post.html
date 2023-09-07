@@ -1,4 +1,5 @@
 {% load static %}
+
 <article class="card">
   <div class="flex items-center justify-between px-4 h-14">
     <h3 class="text-lg font-bold w-[50%] truncate">{{ post.title }}</h3>
@@ -15,7 +16,8 @@
   </figure>
   <div class="p-4 pb-2">
     {% if post.author %}
-      <a class="flex items-center gap-1 mb-4" href="{% url 'user_profile' post.author.username %}">
+      <a class="flex items-center gap-1 mb-4"
+         href="{% url 'user_profile' post.author.username %}">
         <img class="w-8 h-8 rounded-full"
              src="{{ post.author.profile.avatar }}"
              alt="happy" />
@@ -27,7 +29,7 @@
         <img class="w-8 h-8 rounded-full"
              src="{% static 'images/avatar-anon.svg' %}"
              alt="happy" />
-        <span class="text-sm text-gray-400">@admin</span>
+        <span class="text-sm text-gray-400">[deleted]</span>
       </a>
     {% endif %}
     <p class="text-5xl mb-10 px-4 title-font">{{ post.body }}</p>
@@ -47,8 +49,10 @@
           1
         </div>
         <a href="">Like</a>
-        <a href="{% url 'post_edit' post.id %}">Edit</a>
-        <a href="{% url 'post_delete' post.id %}">Delete</a>
+        {% if request.user.is_authenticated and request.user == post.author %}
+          <a href="{% url 'post_edit' post.id %}">Edit</a>
+          <a href="{% url 'post_delete' post.id %}">Delete</a>
+        {% endif %}
       </div>
     </div>
   </div>

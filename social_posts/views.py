@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from .forms import PostCreateForm, PostEditForm
 from .models import Post, Tag
@@ -27,7 +28,7 @@ def home_view(request, tag=None):
         context,
     )
 
-
+@login_required
 def post_create_view(request):
     form = PostCreateForm(request.POST or None)
 
@@ -55,6 +56,8 @@ def post_create_view(request):
 
             post.artist = artist
 
+            post.author = request.user
+
             post.save()
             form.save_m2m()
 
@@ -63,9 +66,9 @@ def post_create_view(request):
     context = {"form": form}
     return render(request, "social_posts/post_create.html", context)
 
-
+@login_required
 def post_delete_view(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+    post = get_object_or_404(Post, id=post_id, author=request.user)
 
     if request.method == "POST":
         post.delete()
@@ -78,13 +81,13 @@ def post_delete_view(request, post_id):
         {"post": post},
     )
 
-
+@login_required()
 def post_edit_view(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     form = PostEditForm(instance=post)
 
     if request.method == "POST":
-        form = PostEditForm(request.POST, instance=post)
+        form = PostEditForm(request.POST, instance=post, author=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, "Post Updated")

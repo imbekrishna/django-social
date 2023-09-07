@@ -72,6 +72,10 @@ button[type="submit"] {
   @apply bg-gray-100 hover:bg-gray-200;
 }
 
+.button-danger{
+  @apply border border-red-500 text-red-500 hover:bg-red-500 hover:text-white
+}
+
 .card {
   display: flex;
   flex-direction: column;

@@ -50,16 +50,23 @@ h2 {
   box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1);
   transition-property: transfrom;
   transition-duration: 0.2s;
-  color: white;
-  background-color: var(--primary);
 }
 
-.button:hover {
+.button-primary{
+  background-color: var(--primary);
+  color: white;
+}
+
+.button-primary:hover {
   background-color: var(--primary-hover);
 }
 
 .button:active {
   transform: scale(0.95);
+}
+
+.button-secondary{
+  @apply bg-gray-100 hover:bg-gray-200;
 }
 
 .card {

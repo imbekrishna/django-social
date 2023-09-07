@@ -594,6 +594,10 @@ video {
   grid-row-start: 1;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
 .mx-\[5\%\] {
   margin-left: 5%;
   margin-right: 5%;
@@ -607,6 +611,10 @@ video {
 .my-12 {
   margin-top: 3rem;
   margin-bottom: 3rem;
+}
+
+.-mt-1 {
+  margin-top: -0.25rem;
 }
 
 .-mt-20 {
@@ -665,6 +673,10 @@ video {
   margin-right: 0.75rem;
 }
 
+.mr-6 {
+  margin-right: 1.5rem;
+}
+
 .mt-0 {
   margin-top: 0px;
 }
@@ -687,6 +699,10 @@ video {
 
 .grid {
   display: grid;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
 }
 
 .h-10 {
@@ -761,10 +777,6 @@ video {
   width: 100vw;
 }
 
-.w-56 {
-  width: 14rem;
-}
-
 .max-w-3xl {
   max-width: 48rem;
 }
@@ -833,6 +845,10 @@ video {
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .items-center {
   align-items: center;
 }
@@ -875,6 +891,10 @@ video {
   border-radius: 0.5rem;
 }
 
+.bg-\[--primary\] {
+  background-color: var(--primary);
+}
+
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -898,6 +918,10 @@ video {
 .bg-teal-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(153 246 228 / var(--tw-bg-opacity));
+}
+
+.bg-transparent {
+  background-color: transparent;
 }
 
 .bg-white {
@@ -924,6 +948,11 @@ video {
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.object-scale-down {
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
 }
 
 .\!p-8 {
@@ -985,6 +1014,10 @@ video {
   text-align: center;
 }
 
+.text-start {
+  text-align: start;
+}
+
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
@@ -1008,9 +1041,18 @@ video {
   font-weight: 300;
 }
 
+.leading-5 {
+  line-height: 1.25rem;
+}
+
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
 .text-gray-500 {
@@ -1104,16 +1146,29 @@ h2 {
   box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1);
   transition-property: transfrom;
   transition-duration: 0.2s;
-  color: white;
-  background-color: var(--primary);
 }
 
-.button:hover {
+.button-primary{
+  background-color: var(--primary);
+  color: white;
+}
+
+.button-primary:hover {
   background-color: var(--primary-hover);
 }
 
 .button:active {
   transform: scale(0.95);
+}
+
+.button-secondary {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.button-secondary:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
 .card {
@@ -1377,6 +1432,11 @@ input {
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-gray-800:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -1440,6 +1500,10 @@ input {
     width: auto;
   }
 
+  .md\:max-w-sm {
+    max-width: 24rem;
+  }
+
   .md\:translate-y-0 {
     --tw-translate-y: 0px;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1451,6 +1515,11 @@ input {
 
   .md\:gap-0 {
     gap: 0px;
+  }
+
+  .md\:\[\&\>\*\>\*\>p\]\:text-4xl>*>*>p {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 }
 

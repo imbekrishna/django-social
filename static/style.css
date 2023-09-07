@@ -758,6 +758,10 @@ video {
   display: grid;
 }
 
+.hidden {
+  display: none;
+}
+
 .aspect-video {
   aspect-ratio: 16 / 9;
 }
@@ -1071,6 +1075,10 @@ video {
   padding: 1rem;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -1125,6 +1133,14 @@ video {
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+
+.\!pb-10 {
+  padding-bottom: 2.5rem !important;
 }
 
 .text-center {

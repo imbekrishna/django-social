@@ -31,6 +31,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=20)
     slug = models.SlugField(max_length=20, unique=True)
     order = models.IntegerField(null=True)
+    image = models.FileField(upload_to="icons/", blank=True, null=True)
 
     def __str__(self) -> str:
         return self.name

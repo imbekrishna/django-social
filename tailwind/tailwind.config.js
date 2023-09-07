@@ -4,7 +4,8 @@ module.exports = {
     // Templates within theme app (e.g. base.html)
     '../templates/**/*.html',
     // Templates in other apps
-    '../social_posts/templates/**/*.html'
+    '../social_posts/templates/**/*.html',
+    '../social_users/templates/**/*.html',
   ],
   theme: {
     extend: {},

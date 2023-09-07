@@ -1,4 +1,4 @@
-{% extends 'layouts/b.html' %}
+{% extends 'layouts/d.html' %}
 
 {% block content %}
 
@@ -7,18 +7,18 @@
             <div class="card p-6">
                 <div class="text-center flex flex-col items-center">
                     <img class="w-36 h-36 rounded-full object-cover mb-4"
-                         src="https://pbs.twimg.com/profile_images/508601156767997952/fFTdKUf2_400x400.jpeg"
+                         src="{{ profile.image.url }}"
                          alt="" />
                     <div class="text-center max-w-md">
-                        <h1>Bart</h1>
-                        <div class="text-gray-400 mb-2 -mt-3">@bartsimpson</div>
+                        <h1>{{ profile.realname }}</h1>
+                        <div class="text-gray-400 mb-2 -mt-3">@{{ profile.user.username }}</div>
                         <div class="flex items-center justify-center mx-auto">
                             <img class="object-cover h-6 mr-1 opacity-60"
                                  src="https://img.icons8.com/material-outlined/50/000000/marker.png"
                                  alt="">
-                            Springfield
+                            {{ profile.location }}
                         </div>
-                        <div class="my-8">I hate school but I love hamburgers</div>
+                        <div class="my-8">{{ profile.bio }}</div>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     </div>
                     <figure>
                         <a href="">
-                            <img class="w-full"
+                            <img class="w-50%"
                                  src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg"
                                  alt="">
                         </a>

@@ -13,7 +13,7 @@
 }
 
 .navitems>li>a {
-  @apply h-12 px-4 hover: bg-gray-700 rounded-lg flex items-center gap-2;
+  @apply h-12 px-4 hover:bg-gray-700 rounded-lg flex items-center gap-2;
 }
 
 h1 {
@@ -69,7 +69,7 @@ button[type="submit"] {
 }
 
 .button-secondary {
-  @apply bg-gray-100 hover: bg-gray-200;
+  @apply bg-gray-100 hover:bg-gray-200;
 }
 
 .card {
@@ -85,7 +85,7 @@ button[type="submit"] {
 }
 
 .hoverlist>* {
-  @apply hover: bg-gray-100 rounded-md transition duration-150;
+  @apply hover:bg-gray-100 rounded-md transition duration-150;
 }
 
 .hoverlist>*>a {

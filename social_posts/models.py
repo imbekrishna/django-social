@@ -1,3 +1,4 @@
+from os import name
 from django.db import models
 import uuid
 
@@ -16,9 +17,19 @@ class Post(models.Model):
         unique=True,
         editable=False,
     )
+
+    tags = models.ManyToManyField("Tag")
     
     class Meta:
         ordering = ['-created']
 
     def __str__(self) -> str:
         return self.title
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=20)
+    slug = models.SlugField(max_length=20, unique=True)
+
+    def __str__(self) -> str:
+        return self.name

@@ -9,6 +9,7 @@
 :root {
   --primary: rgb(88, 40, 244);
   --primary-hover: rgb(69, 29, 200);
+  --black : #040D12;
 }
 
 .navitems>li>a {
@@ -184,16 +185,16 @@ input[name="remember"] {
   @apply text-gray-500 underline bg-white;
 }
 
-#id_tags {
+.id_tags {
   margin-bottom: 1rem;
 }
 
-#id_tags div {
+.id_tags div {
   display: inline-block;
   margin-right: 0.5rem;
 }
 
-#id_tags div label {
+.id_tags div label {
   border-radius: 9999px;
   padding: 0.5rem 1rem;
   border: 1px solid rgb(229 231 235);
@@ -202,14 +203,14 @@ input[name="remember"] {
   user-select: none;
 }
 
-#id_tags input {
+.id_tags input {
   display: none;
 }
 
-#id_tags label:has(input:checked) {
-  background-color: var(--black);
+.id_tags label:has(input:checked) {
+  background-color: #040D12;
   color: white;
-  border: 1px solid var(--black);
+  border: 1px solid #040D12;
 }
 
 .textarea,

@@ -4,58 +4,18 @@
 
     <div class="md:flex items-center">
         <div class="w-full md:max-w-sm mr-6 md:[&>*>*>p]:text-4xl">
-            <article class="card">
-                <div class="flex items-center justify-between px-4 h-14">
-                    <h3 class="text-start leading-5 mr-1">{{ post.title }}</h3>
-                    {% if post.artist %}
-                        <div class="text-sm text-gray-400 truncate">
-                            flickr<a href="" class="hover:underline ml-1" target="blank">{{ post.artist }}</a>
-                        </div>
-                    {% endif %}
-                </div>
-                <figure>
-                    <a href="">
-                        <img class="w-full" src="{{ post.image }}" alt="">
-                    </a>
-                </figure>
-                <div class="p-4 pb-2">
-                    <a class="flex items-center gap-1 mb-4" href="">
-                        <img class="w-8 h-8 object-cover rounded-full"
-                             src="https://img.icons8.com/small/96/A9A9A9/happy.png"
-                             alt="">
-                        <span class="font-bold hover:underline">Lisa</span>
-                        <span class="text-sm text-gray-400">@lisasimpson</span>
-                    </a>
-                    <p class="text-5xl mb-10 px-4 font1">{{ post.body }}</p>
-                    <div class="flex items-center gap-2 text-sm mb-5 flex-wrap">
-                        <a class="bg-gray-200 rounded-full px-3 py-1 hover:bg-gray-800 hover:text-white"
-                           href="">Animals</a>
-                        <a class="bg-gray-200 rounded-full px-3 py-1 hover:bg-gray-800 hover:text-white"
-                           href="">Black & White</a>
-                    </div>
-                    <div class="flex items-center justify-between text-sm px-2">
-                        <a class="font-bold hover:underline" href="">Comments<span class="font-light text-gray-500 ml-1">3</span></a>
-                        <div class="flex items-center gap-4 [&>a:hover]:underline">
-                            <div class="flex items-center gap-1">
-                                <img class="w-5 -mt-1"
-                                     src="https://img.icons8.com/small/24/000000/fire-heart.png"
-                                     alt="">
-                                1
-                            </div>
-                            <a href="">Like</a>
-                            <a href="">Edit</a>
-                            <a href="">Delete</a>
-                        </div>
-                    </div>
-                </div>
-            </article>
+
+            {% include 'social_posts/post.html' %}
+
         </div>
         <div>
             <h1>Delete Post</h1>
             <p class="mb-6">Are you sure you want to delete this post?</p>
             <form method='post'>
+                {% csrf_token %}
                 <button type="submit" class="button button-primary mt-1">Confirm</button>
-                <a class="button button-secondary ml-1" href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+                <a class="button button-secondary ml-1"
+                   href="{{ request.META.HTTP_REFERER }}">Go Back</a>
             </form>
         </div>
     </div>

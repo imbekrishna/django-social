@@ -1,15 +1,20 @@
 import requests
 from bs4 import BeautifulSoup
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib import messages
 
-from .forms import PostCreateForm
+from .forms import PostCreateForm, PostEditForm
 from .models import Post
 
 
 # Create your views here.
 def home_view(request):
     posts = Post.objects.all()
-    return render(request, "social_posts/home.html", {"posts": posts})
+    return render(
+        request,
+        "social_posts/home.html",
+        {"posts": posts},
+    )
 
 
 def post_create_view(request):
@@ -49,6 +54,41 @@ def post_create_view(request):
 def post_delete_view(request, post_id):
     post = get_object_or_404(Post, id=post_id)
 
-    
+    if request.method == "POST":
+        post.delete()
+        messages.success(request, "Post deleted")
+        return redirect("home_view")
 
-    return render(request, "social_posts/post_delete.html", {"post": post})
+    return render(
+        request,
+        "social_posts/post_delete.html",
+        {"post": post},
+    )
+
+
+def post_edit_view(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    form = PostEditForm(instance=post)
+
+    if request.method == "POST":
+        form = PostEditForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Post Updated")
+            return redirect("home_view")
+
+    context = {
+        "post": post,
+        "form": form,
+    }
+    return render(
+        request,
+        "social_posts/post_edit.html",
+        context,
+    )
+
+
+def post_page_view(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    return render(request, "social_posts/post_page.html", {"post": post})

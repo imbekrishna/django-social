@@ -1,6 +1,7 @@
-from os import name
+from django.contrib.auth.models import User
 from django.db import models
 import uuid
+
 
 # Create your models here.
 class Post(models.Model):
@@ -17,11 +18,16 @@ class Post(models.Model):
         unique=True,
         editable=False,
     )
-
     tags = models.ManyToManyField("Tag")
-    
+    author = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="posts",
+    )
+
     class Meta:
-        ordering = ['-created']
+        ordering = ["-created"]
 
     def __str__(self) -> str:
         return self.title
@@ -35,6 +41,6 @@ class Tag(models.Model):
 
     def __str__(self) -> str:
         return self.name
-    
+
     class Meta:
-        ordering = ['order']
+        ordering = ["order"]

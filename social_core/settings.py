@@ -29,8 +29,10 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    # created apps
     "social_posts",
     "social_users",
+    # default apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -38,10 +40,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_browser_reload",
+    # django allauth apps
     "django.contrib.sites",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    # additional plugins
+    "django_cleanup.apps.CleanupConfig",
 ]
 
 SITE_ID = 1
@@ -150,3 +155,11 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_BLACKLIST = [
+    "admin",
+    "account",
+    "profile",
+    "category",
+    "post",
+    "tag",
+]

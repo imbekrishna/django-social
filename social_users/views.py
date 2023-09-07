@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from .forms import ProfileForm
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -14,6 +15,7 @@ def profile_view(request, username=None):
         profile = request.user.profile
     return render(request, "social_users/profile.html", {"profile": profile})
 
+
 @login_required
 def profile_edit(request):
     form = ProfileForm(instance=request.user.profile)
@@ -25,15 +27,21 @@ def profile_edit(request):
             form.save()
             return redirect("profile_view")
 
-    return render(request, "social_users/profile_edit.html", {"form": form})
+    if request.path == reverse("profile_onboarding"):
+        template = "social_users/profile_onboarding.html"
+    else:
+        template = "social_users/profile_edit.html"
+        
+    return render(request, template, {"form": form})
+
 
 @login_required
 def profile_delete_view(request):
     user = request.user
-    
+
     if request.method == "POST":
         logout(request)
         user.delete()
         messages.success(request, "Account deleted!")
-        return redirect('home_view')
+        return redirect("home_view")
     return render(request, "social_users/profile_delete.html")

@@ -1,58 +1,22 @@
-<aside
-  x-show="mobileSidebarOpen"
-  x-cloak
-  class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[20%] order-1 md:order-2"
-  x-transition:enter="duration-300 ease-out"
-  x-transition:enter-start="opacity-0 -mt-96"
-  x-transition:enter-end="opacity-100 mt-0">
+<aside x-show="mobileSidebarOpen"
+       x-cloak
+       class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[20%] order-1 md:order-2"
+       x-transition:enter="duration-300 ease-out"
+       x-transition:enter-start="opacity-0 -mt-96"
+       x-transition:enter-end="opacity-100 mt-0">
   <section class="card p-4">
     <h2>Categories</h2>
     <ul class="hoverlist">
-      <li class="highlight">
-        <a href="">
-          <img
-            class="w-8 h-8 object-cover mr-2"
-            src="https://img.icons8.com/small/96/null/landscape.png"
-            alt="" />
-          <span class="font-bold text-sm">Landscape</span>
-        </a>
-      </li>
-      <li>
-        <a href="">
-          <img
-            class="w-8 h-8 object-cover mr-2"
-            src="https://img.icons8.com/small/96/null/portrait.png"
-            alt="" />
-          <span class="font-bold text-sm">People</span>
-        </a>
-      </li>
-      <li>
-        <a href="">
-          <img
-            class="w-8 h-8 object-cover mr-2"
-            src="https://img.icons8.com/small/96/null/dog.png"
-            alt="" />
-          <span class="font-bold text-sm">Animals</span>
-        </a>
-      </li>
-      <li>
-        <a href="">
-          <img
-            class="w-8 h-8 object-cover mr-2"
-            src="https://img.icons8.com/small/96/null/collage.png"
-            alt="" />
-          <span class="font-bold text-sm">Abstract</span>
-        </a>
-      </li>
-      <li>
-        <a href="">
-          <img
-            class="w-8 h-8 object-cover mr-2"
-            src="https://img.icons8.com/small/96/null/180-degrees.png"
-            alt="" />
-          <span class="font-bold text-sm">Black & White</span>
-        </a>
-      </li>
+      {% for category in categories %}
+        <li class="{% if category.slug == tag.slug %}highlight{% endif %}">
+          <a href="{% url 'tag_view' category.slug %}">
+            <img class="w-8 h-8 object-cover mr-2"
+                 src="https://img.icons8.com/small/96/null/landscape.png"
+                 alt="" />
+            <span class="font-bold text-sm">{{ category.name }}</span>
+          </a>
+        </li>
+      {% endfor %}
     </ul>
   </section>
   <section class="card p-4">
@@ -60,28 +24,24 @@
     <ul class="hoverlist">
       <li>
         <a href="">
-          <img
-            class="w-10 h-10 rounded-lg object-cover mr-3"
-            src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg"
-            alt="Kitty" />
-          <img
-            class="w-6 h-6 rounded-full mr-0.5"
-            src="https://img.icons8.com/small/64/a9a9a9/happy.png"
-            alt="happy" />
+          <img class="w-10 h-10 rounded-lg object-cover mr-3"
+               src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg"
+               alt="Kitty" />
+          <img class="w-6 h-6 rounded-full mr-0.5"
+               src="https://img.icons8.com/small/64/a9a9a9/happy.png"
+               alt="happy" />
           <span class="font-bold text-sm mr-1">Homer</span>
           <span class="text-sm font-light text-gray-500">(5 Likes)</span>
         </a>
       </li>
       <li>
         <a href="">
-          <img
-            class="w-10 h-10 rounded-lg object-cover mr-3"
-            src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg"
-            alt="Kitty" />
-          <img
-            class="w-6 h-6 rounded-full mr-0.5"
-            src="https://img.icons8.com/small/64/a9a9a9/happy.png"
-            alt="happy" />
+          <img class="w-10 h-10 rounded-lg object-cover mr-3"
+               src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg"
+               alt="Kitty" />
+          <img class="w-6 h-6 rounded-full mr-0.5"
+               src="https://img.icons8.com/small/64/a9a9a9/happy.png"
+               alt="happy" />
           <span class="font-bold text-sm mr-1">Homer</span>
           <span class="text-sm font-light text-gray-500">(5 Likes)</span>
         </a>
@@ -93,20 +53,18 @@
     <ul class="hoverlist">
       <li>
         <a href="">
-          <img
-            class="w-6 h-6 rounded-full mr-1"
-            src="https://img.icons8.com/small/64/a9a9a9/happy.png"
-            alt="happy" />
+          <img class="w-6 h-6 rounded-full mr-1"
+               src="https://img.icons8.com/small/64/a9a9a9/happy.png"
+               alt="happy" />
           <span class="font-bold text-sm mr-1">Homer</span>
           <span class="text-sm font-light text-gray-500">(5 Likes)</span>
         </a>
       </li>
       <li>
         <a href="">
-          <img
-            class="w-6 h-6 rounded-full mr-1"
-            src="https://img.icons8.com/small/64/a9a9a9/happy.png"
-            alt="happy" />
+          <img class="w-6 h-6 rounded-full mr-1"
+               src="https://img.icons8.com/small/64/a9a9a9/happy.png"
+               alt="happy" />
           <span class="font-bold text-sm mr-1">Homer</span>
           <span class="text-sm font-light text-gray-500">(5 Likes)</span>
         </a>

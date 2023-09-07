@@ -1041,6 +1041,10 @@ video {
   background-position: center;
 }
 
+.fill-white {
+  fill: #fff;
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;

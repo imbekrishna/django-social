@@ -1,11 +1,12 @@
+from pkg_resources import parse_requirements
 import requests
 from bs4 import BeautifulSoup
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .forms import CommentCreateForm, PostCreateForm, PostEditForm
-from .models import Comment, Post, Tag
+from .forms import CommentCreateForm, PostCreateForm, PostEditForm, ReplyCreateForm
+from .models import Comment, Post, Reply, Tag
 
 
 def home_view(request, tag=None):
@@ -111,9 +112,16 @@ def post_page_view(request, post_id):
     post = get_object_or_404(Post, id=post_id)
 
     commentform = CommentCreateForm()
-    context = {"post": post, "commentform": commentform}
+    replyform = ReplyCreateForm()
+
+    context = {
+        "post": post,
+        "commentform": commentform,
+        "replyform": replyform,
+    }
 
     return render(request, "social_posts/post_page.html", context)
+
 
 @login_required
 def comment_sent(request, post_id):
@@ -121,14 +129,14 @@ def comment_sent(request, post_id):
 
     if request.method == "POST":
         form = CommentCreateForm(request.POST)
-        
+
         if form.is_valid():
             comment = form.save(commit=False)
             comment.author = request.user
             comment.parent_post = post
             comment.save()
-    
-    return redirect('post_view', post.id)
+
+    return redirect("post_view", post.id)
 
 
 @login_required
@@ -144,4 +152,35 @@ def comment_delete_view(request, comment_id):
         request,
         "social_posts/comment_delete.html",
         {"comment": comment},
+    )
+
+
+@login_required
+def reply_sent(request, comment_id):
+    parent_commment = get_object_or_404(Comment, id=comment_id)
+
+    if request.method == "POST":
+        form = ReplyCreateForm(request.POST)
+
+        if form.is_valid():
+            reply = form.save(commit=False)
+            reply.author = request.user
+            reply.parent_comment = parent_commment
+            reply.save()
+
+    return redirect("post_view", parent_commment.parent_post.id)
+
+login_required
+def reply_delete_view(request, reply_id):
+    reply = get_object_or_404(Reply, id=reply_id, author=request.user)
+
+    if request.method == "POST":
+        reply.delete()
+        messages.success(request, "Reply deleted")
+        return redirect("post_view", reply.parent_comment.parent_post.id)
+
+    return render(
+        request,
+        "social_posts/reply_delete.html",
+        {"reply": reply},
     )

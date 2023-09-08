@@ -15,4 +15,10 @@ urlpatterns = [
         views.comment_delete_view,
         name="comment_delete",
     ),
+    path("reply/<uuid:comment_id>/", views.reply_sent, name="post_reply"),
+    path(
+        "reply/delete/<uuid:reply_id>/",
+        views.reply_delete_view,
+        name="reply_delete",
+    ),
 ]

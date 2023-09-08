@@ -26,11 +26,22 @@ class Post(models.Model):
         related_name="posts",
     )
 
+    likes = models.ManyToManyField(User, related_name="likedposts", through="LikedPost")
+
     class Meta:
         ordering = ["-created"]
 
     def __str__(self) -> str:
         return self.title
+
+
+class LikedPost(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f"{self.user.username}: {self.post.title}"
 
 
 class Tag(models.Model):
@@ -70,7 +81,8 @@ class Comment(models.Model):
             return f"[deleted]: {self.body[:30]}"
 
     class Meta:
-        ordering = ['-created']
+        ordering = ["-created"]
+
 
 class Reply(models.Model):
     author = models.ForeignKey(
@@ -96,6 +108,5 @@ class Reply(models.Model):
             return f"[deleted]: {self.body[:30]}"
 
     class Meta:
-        ordering = ['-created']
+        ordering = ["-created"]
         verbose_name_plural = "Replies"
-

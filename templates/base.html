@@ -18,12 +18,16 @@
           href="https://img.icons8.com/wired/64/000000/social-network.png"
           type="image/png" />
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
   </head>
   <body class="bg-gray-100">
+
     {% include 'includes/messages.html' %}
     {% include 'includes/header.html' %}
 
     {% block layout %}
+
     {% endblock layout %}
+
   </body>
 </html>

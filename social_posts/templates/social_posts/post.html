@@ -50,13 +50,9 @@
         {% endif %}
       {% endif %}
       <div class="flex items-center gap-4 [&>a:hover]:underline">
-        <div class="flex items-center gap-1">
-          <img class="w-5"
-               src="{% static 'images/heart-outline.svg' %}"
-               alt="hearts" />
-          1
-        </div>
-        <a href="">Like</a>
+
+        {% include "snippets/likes.html" %}
+
         {% if request.user.is_authenticated and request.user == post.author %}
           <a href="{% url 'post_edit' post.id %}">Edit</a>
           <a href="{% url 'post_delete' post.id %}">Delete</a>

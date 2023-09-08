@@ -21,4 +21,5 @@ urlpatterns = [
         views.reply_delete_view,
         name="reply_delete",
     ),
+    path("<uuid:post_id>/like/", views.like_post, name="post_like"),
 ]

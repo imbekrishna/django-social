@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from pkg_resources import parse_requirements
 import requests
 from bs4 import BeautifulSoup
@@ -170,7 +171,10 @@ def reply_sent(request, comment_id):
 
     return redirect("post_view", parent_commment.parent_post.id)
 
+
 login_required
+
+
 def reply_delete_view(request, reply_id):
     reply = get_object_or_404(Reply, id=reply_id, author=request.user)
 
@@ -184,3 +188,16 @@ def reply_delete_view(request, reply_id):
         "social_posts/reply_delete.html",
         {"reply": reply},
     )
+
+
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    user_exists = post.likes.filter(username=request.user.username).exists()
+
+    if post.author != request.user:
+        if user_exists:
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+
+    return render(request, "snippets/likes.html", {"post": post})

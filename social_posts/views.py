@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .forms import PostCreateForm, PostEditForm
-from .models import Post, Tag
+from .forms import CommentCreateForm, PostCreateForm, PostEditForm
+from .models import Comment, Post, Tag
 
 
 def home_view(request, tag=None):
@@ -110,4 +110,38 @@ def post_edit_view(request, post_id):
 def post_page_view(request, post_id):
     post = get_object_or_404(Post, id=post_id)
 
-    return render(request, "social_posts/post_page.html", {"post": post})
+    commentform = CommentCreateForm()
+    context = {"post": post, "commentform": commentform}
+
+    return render(request, "social_posts/post_page.html", context)
+
+@login_required
+def comment_sent(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    if request.method == "POST":
+        form = CommentCreateForm(request.POST)
+        
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.parent_post = post
+            comment.save()
+    
+    return redirect('post_view', post.id)
+
+
+@login_required
+def comment_delete_view(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id, author=request.user)
+
+    if request.method == "POST":
+        comment.delete()
+        messages.success(request, "Comment deleted")
+        return redirect("post_view", comment.parent_post.id)
+
+    return render(
+        request,
+        "social_posts/comment_delete.html",
+        {"comment": comment},
+    )

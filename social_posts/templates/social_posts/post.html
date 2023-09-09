@@ -42,7 +42,8 @@
     <div class="flex items-center justify-between text-sm px-2">
       {% if post.comments.count %}
         <a class="font-bold hover:underline"
-           href="{% url 'post_view' post.id %}#comments">Comment{{ post.comments.count|pluralize }}<span class="font-light text-gray-500 ml-2">{{ post.comments.count }}</span></a>
+           href="{% url 'post_view' post.id %}#comments">Comment{{ post.comments.count|pluralize }}<span id="commentscount-{{ post.id }}"
+      class="font-light text-gray-500 ml-2">{{ post.comments.count }}</span></a>
       {% else %}
         {% if user.is_authenticated %}
           <a class="font-bold hover:underline"

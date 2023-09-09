@@ -128,6 +128,7 @@ def post_page_view(request, post_id):
 @login_required
 def comment_sent(request, post_id):
     post = get_object_or_404(Post, id=post_id)
+    replyform = ReplyCreateForm()
 
     if request.method == "POST":
         form = CommentCreateForm(request.POST)
@@ -138,7 +139,15 @@ def comment_sent(request, post_id):
             comment.parent_post = post
             comment.save()
 
-    return redirect("post_view", post.id)
+    return render(
+        request,
+        "snippets/add_comment.html",
+        {
+            "comment": comment,
+            "post": post,
+            "replyform": replyform,
+        },
+    )
 
 
 @login_required
@@ -159,7 +168,9 @@ def comment_delete_view(request, comment_id):
 
 @login_required
 def reply_sent(request, comment_id):
-    parent_commment = get_object_or_404(Comment, id=comment_id)
+    parent_comment = get_object_or_404(Comment, id=comment_id)
+
+    replyform = ReplyCreateForm()
 
     if request.method == "POST":
         form = ReplyCreateForm(request.POST)
@@ -167,15 +178,23 @@ def reply_sent(request, comment_id):
         if form.is_valid():
             reply = form.save(commit=False)
             reply.author = request.user
-            reply.parent_comment = parent_commment
+            reply.parent_comment = parent_comment
             reply.save()
 
-    return redirect("post_view", parent_commment.parent_post.id)
+    context = {
+        "comment": parent_comment,
+        "reply": reply,
+        "replyform": replyform,
+    }
+
+    return render(
+        request,
+        "snippets/add_reply.html",
+        context,
+    )
 
 
-login_required
-
-
+@login_required
 def reply_delete_view(request, reply_id):
     reply = get_object_or_404(Reply, id=reply_id, author=request.user)
 
@@ -218,7 +237,8 @@ def like_post(request, post):
 @login_required
 @like_toggle(Comment)
 def like_comment(request, post):
-    return render(request, "snippets/likes_comments.html", {"comment": post})
+    return render(request, "snippets/likes_comment.html", {"comment": post})
+
 
 @login_required
 @like_toggle(Reply)

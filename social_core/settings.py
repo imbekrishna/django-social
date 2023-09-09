@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     # additional plugins
     "django_cleanup.apps.CleanupConfig",
+    "django_htmx"
 ]
 
 SITE_ID = 1
@@ -60,6 +61,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
+
 ]
 
 ROOT_URLCONF = "social_core.urls"

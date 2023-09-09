@@ -26,13 +26,7 @@
     {% endif %}
 </div>
 <div class="flex items-center gap-4 [&>a:hover]:underline">
-    <div class="flex items-center gap-1">
-        <img class="w-5 -mt-1"
-             src="{% static 'images/heart-outline.svg' %}"
-             alt="">
-        1
-    </div>
-    <a href="">Like</a>
+    {% include "snippets/likes_reply.html" %}
     {% if user.is_authenticated and reply.author == user %}
         <a href="{% url 'reply_delete' reply.id %}">Delete</a>
     {% endif %}
